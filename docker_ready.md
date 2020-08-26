@@ -1,7 +1,7 @@
+
+
+**ubuntu@ubuntu** :/etc/docker$ systemctl status docker.service
 ```
-
-
-ubuntu@ubuntu:/etc/docker$ systemctl status docker.service
 ● docker.service - Docker Application Container Engine
      Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
      Active: failed (Result: exit-code) since Wed 2020-08-26 03:19:10 UTC; 11min ago
@@ -18,13 +18,17 @@ Aug 26 03:19:10 ubuntu systemd[1]: Failed to start Docker Application Container 
 Aug 26 03:19:56 ubuntu systemd[1]: docker.service: Start request repeated too quickly.
 Aug 26 03:19:56 ubuntu systemd[1]: docker.service: Failed with result 'exit-code'.
 Aug 26 03:19:56 ubuntu systemd[1]: Failed to start Docker Application Container Engine.
-ubuntu@ubuntu:/etc/docker$ systemctl start docker
+```
+**ubuntu@ubuntu**:/etc/docker$ systemctl start docker
+```
 ==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
 Authentication is required to start 'docker.service'.
 Authenticating as: Ubuntu (ubuntu)
 Password:
 ==== AUTHENTICATION COMPLETE ===
-ubuntu@ubuntu:/etc/docker$ systemctl status docker.service
+```
+**ubuntu@ubuntu**:/etc/docker$ systemctl status docker.service
+```
 ● docker.service - Docker Application Container Engine
      Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
      Active: active (running) since Wed 2020-08-26 03:31:30 UTC; 5s ago
@@ -68,27 +72,9 @@ Aug 26 03:31:30 ubuntu dockerd[4262]: time="2020-08-26T03:31:30.270292359Z" leve
 Aug 26 03:31:30 ubuntu dockerd[4262]: time="2020-08-26T03:31:30.272861340Z" level=info msg="Daemon has completed initialization"
 Aug 26 03:31:30 ubuntu systemd[1]: Started Docker Application Container Engine.
 Aug 26 03:31:30 ubuntu dockerd[4262]: time="2020-08-26T03:31:30.412318850Z" level=info msg="API listen on /run/docker.sock"
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-
-ubuntu@ubuntu:/etc/docker$ docker run hello-world
+```
+**ubuntu@ubuntu**:/etc/docker$ docker run hello-world
+```
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 256ab8fe8778: Pull complete
@@ -115,8 +101,9 @@ Share images, automate workflows, and more with a free Docker ID:
 
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
-
-ubuntu@ubuntu:/etc/docker$ sudo kubeadm init --token=${TOKEN} --kubernetes-version=v1.18.2 --pod-network-cidr=10.244.0.0/16
+```
+**ubuntu@ubuntu**:/etc/docker$ sudo kubeadm init --token=${TOKEN} --kubernetes-version=v1.18.2 --pod-network-cidr=10.244.0.0/16
+```
 W0826 03:32:37.899317    4626 configset.go:202] WARNING: kubeadm cannot validate component configs for API groups [kubelet.config.k8s.io kubeproxy.config.k8s.io]
 [init] Using Kubernetes version: v1.18.2
 [preflight] Running pre-flight checks
@@ -187,28 +174,17 @@ Then you can join any number of worker nodes by running the following on each as
 
 kubeadm join 192.168.2.50:6443 --token jno24i.oyccq0fkdc1mkwxl \
     --discovery-token-ca-cert-hash sha256:9a61388bb5000eb78aca3339ebbc97faf951a97415cf74d2c4fa88e4a635ea6f
-ubuntu@ubuntu:/etc/docker$ mkdir -p $HOME/.kube
-ubuntu@ubuntu:/etc/docker$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-ubuntu@ubuntu:/etc/docker$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
-ubuntu@ubuntu:/etc/docker$ kubectl get nodes
+```
+**ubuntu@ubuntu**:/etc/docker$ mkdir -p $HOME/.kube
+**ubuntu@ubuntu**:/etc/docker$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+**ubuntu@ubuntu**:/etc/docker$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+**ubuntu@ubuntu**:/etc/docker$ kubectl get nodes
+```
 NAME     STATUS     ROLES    AGE     VERSION
 ubuntu   NotReady   master   2m26s   v1.18.8
-ubuntu@ubuntu:/etc/docker$ kubectl get nodes
-NAME     STATUS     ROLES    AGE     VERSION
-ubuntu   NotReady   master   5m31s   v1.18.8
-ubuntu@ubuntu:/etc/docker$ kubectl get nodes
-NAME     STATUS     ROLES    AGE     VERSION
-ubuntu   NotReady   master   5m33s   v1.18.8
-ubuntu@ubuntu:/etc/docker$ kubectl get nodes
-NAME     STATUS     ROLES    AGE     VERSION
-ubuntu   NotReady   master   5m36s   v1.18.8
-ubuntu@ubuntu:/etc/docker$ kubectl get nodes
-NAME     STATUS     ROLES    AGE     VERSION
-ubuntu   NotReady   master   6m33s   v1.18.8
-ubuntu@ubuntu:/etc/docker$ kubectl get nodes get status
-Error from server (NotFound): nodes "get" not found
-Error from server (NotFound): nodes "status" not found
-ubuntu@ubuntu:/etc/docker$ kubectl describe node ubuntu
+```
+**ubuntu@ubuntu**:/etc/docker$ kubectl describe node ubuntu
+```
 Name:               ubuntu
 Roles:              master
 Labels:             beta.kubernetes.io/arch=arm64
@@ -288,7 +264,9 @@ Events:
   Normal  NodeHasSufficientPID     8m1s                   kubelet, ubuntu     Node ubuntu status is now: NodeHasSufficientPID
   Normal  NodeAllocatableEnforced  8m                     kubelet, ubuntu     Updated Node Allocatable limit across pods
   Normal  Starting                 7m52s                  kube-proxy, ubuntu  Starting kube-proxy.
-ubuntu@ubuntu:/etc/docker$ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+```
+**ubuntu@ubuntu**:/etc/docker$ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+```
 podsecuritypolicy.policy/psp.flannel.unprivileged created
 clusterrole.rbac.authorization.k8s.io/flannel created
 clusterrolebinding.rbac.authorization.k8s.io/flannel created
@@ -299,31 +277,15 @@ daemonset.apps/kube-flannel-ds-arm64 created
 daemonset.apps/kube-flannel-ds-arm created
 daemonset.apps/kube-flannel-ds-ppc64le created
 daemonset.apps/kube-flannel-ds-s390x created
-ubuntu@ubuntu:/etc/docker$ kubectl get nodes
-NAME     STATUS     ROLES    AGE   VERSION
-ubuntu   NotReady   master   11m   v1.18.8
-ubuntu@ubuntu:/etc/docker$ kubectl get nodes
-NAME     STATUS     ROLES    AGE   VERSION
-ubuntu   NotReady   master   11m   v1.18.8
-ubuntu@ubuntu:/etc/docker$ kubectl get nodes
-NAME     STATUS     ROLES    AGE   VERSION
-ubuntu   NotReady   master   11m   v1.18.8
-ubuntu@ubuntu:/etc/docker$ kubectl get nodes
-NAME     STATUS     ROLES    AGE   VERSION
-ubuntu   NotReady   master   11m   v1.18.8
-ubuntu@ubuntu:/etc/docker$ kubectl get nodes
-NAME     STATUS     ROLES    AGE   VERSION
-ubuntu   NotReady   master   11m   v1.18.8
-ubuntu@ubuntu:/etc/docker$ kubectl get nodes
-NAME     STATUS     ROLES    AGE   VERSION
-ubuntu   NotReady   master   11m   v1.18.8
-ubuntu@ubuntu:/etc/docker$ kubectl get nodes
-NAME     STATUS     ROLES    AGE   VERSION
-ubuntu   NotReady   master   11m   v1.18.8
-ubuntu@ubuntu:/etc/docker$ kubectl get nodes
+```
+
+**ubuntu@ubuntu**:/etc/docker$ kubectl get nodes
+```
 NAME     STATUS   ROLES    AGE   VERSION
 ubuntu   Ready    master   11m   v1.18.8
-ubuntu@ubuntu:/etc/docker$ kubectl describe node ubuntu
+```
+**ubuntu@ubuntu**:/etc/docker$ kubectl describe node ubuntu
+```
 Name:               ubuntu
 Roles:              master
 Labels:             beta.kubernetes.io/arch=arm64
@@ -411,9 +373,16 @@ Events:
   Normal  NodeAllocatableEnforced  11m                kubelet, ubuntu     Updated Node Allocatable limit across pods
   Normal  Starting                 11m                kube-proxy, ubuntu  Starting kube-proxy.
   Normal  NodeReady                14s                kubelet, ubuntu     Node ubuntu status is now: NodeReady
-ubuntu@ubuntu:/etc/docker$ kubectl get pods
-No resources found in default namespace.
-ubuntu@ubuntu:/etc/docker$ kubectl get pods -n all
-No resources found in all namespace.
-ubuntu@ubuntu:/etc/docker$
+```
+**ubuntu@ubuntu**:/etc/docker$ kubectl get pod --all-namespaces -o wide
+```
+NAMESPACE     NAME                             READY   STATUS    RESTARTS   AGE   IP             NODE     NOMINATED NODE   READINESS GATES
+kube-system   coredns-66bff467f8-tjthm         1/1     Running   0          11h   10.244.0.2     ubuntu   <none>           <none>
+kube-system   coredns-66bff467f8-w4m94         1/1     Running   0          11h   10.244.0.3     ubuntu   <none>           <none>
+kube-system   etcd-ubuntu                      1/1     Running   0          11h   192.168.2.50   ubuntu   <none>           <none>
+kube-system   kube-apiserver-ubuntu            1/1     Running   0          11h   192.168.2.50   ubuntu   <none>           <none>
+kube-system   kube-controller-manager-ubuntu   1/1     Running   0          11h   192.168.2.50   ubuntu   <none>           <none>
+kube-system   kube-flannel-ds-arm64-bcxg8      1/1     Running   0          11h   192.168.2.50   ubuntu   <none>           <none>
+kube-system   kube-proxy-db2mg                 1/1     Running   0          11h   192.168.2.50   ubuntu   <none>           <none>
+kube-system   kube-scheduler-ubuntu            1/1     Running   0          11h   192.168.2.50   ubuntu   <none>           <none>
 ```
