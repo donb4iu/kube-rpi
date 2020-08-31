@@ -1,5 +1,5 @@
 
-
+**[06:07:01]ubuntu@ubuntu** :(192.168.2.52)~$ sudo usermod -aG docker ${USER}
 **ubuntu@ubuntu** :/etc/docker$ systemctl status docker.service
 ```
 ● docker.service - Docker Application Container Engine
