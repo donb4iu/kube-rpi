@@ -9,7 +9,7 @@ network:
     eth0:
       dhcp4: false
       addresses: [192.168.2.50/24]
-      gateway4: 192.168.0.253
+      gateway4: 192.168.2.253
       nameservers:
         addresses: [8.8.8.8, 4.4.4.4]
 #  wifis:
