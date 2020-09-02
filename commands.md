@@ -1,4 +1,4 @@
-# kubectl commands
+# [kubectl commands](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 
 ## get nodes
 
@@ -27,4 +27,65 @@ kube-system   kube-proxy-5fsfj                 1/1     Running   0          6m21
 kube-system   kube-proxy-8cbdj                 1/1     Running   0          37m     192.168.2.51   ubuntu51   <none>           <none>
 kube-system   kube-proxy-ncdgg                 1/1     Running   0          25h     192.168.2.50   ubuntu     <none>           <none>
 kube-system   kube-scheduler-ubuntu            1/1     Running   0          25h     192.168.2.50   ubuntu     <none>           <none>
+```
+
+## create namespace 
+**[18:48:15]ubuntu@ubuntu:(192.168.2.50)~$ kubectl create namespace kube-verify**
+```
+namespace/kube-verify created
+```
+
+## get namespaces
+
+**[23:07:46]ubuntu@ubuntu:(192.168.2.50)~$ kubectl get namespaces**
+```
+NAME              STATUS   AGE
+default           Active   41h
+kube-node-lease   Active   41h
+kube-public       Active   41h
+kube-system       Active   41h
+kube-verify       Active   15s
+```
+
+## create deployment
+
+**[23:08:01]ubuntu@ubuntu:(192.168.2.50)~$ cat <<EOF | kubectl create -f**- 
+```
+> apiVersion: apps/v1
+> kind: Deployment
+> metadata:
+>   name: kube-verify
+>   namespace: kube-verify
+>   labels:
+>     app: kube-verify
+> spec:
+>   replicas: 3
+>   selector:
+>     matchLabels:
+>       app: kube-verify
+>   template:
+>     metadata:
+>       labels:
+>         app: kube-verify
+>     spec:
+>       containers:
+>       - name: nginx
+>         image: quay.io/clcollins/kube-verify:01
+>         ports:
+>         - containerPort: 8080
+> EOF 
+
+deployment.apps/kube-verify created
+
+```
+## get events
+
+kubectl get events --all-namespaces  --sort-by='.metadata.creationTimestamp'
+
+## get service IP
+
+**[00:28:22]ubuntu@ubuntu:(192.168.2.50)~$ kubectl get -n kube-verify service/kube-verify**
+```
+NAME          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+kube-verify   ClusterIP   10.105.119.235   <none>        80/TCP    19s
 ```
